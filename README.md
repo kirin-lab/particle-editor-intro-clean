@@ -1,5 +1,7 @@
 # Particle Editor
 
+**繁體中文** | [English](README.en.md)
+
 用瀏覽器快速建立、預覽並輸出適用於 **Spine 3.8.99** 的烘焙式粒子動畫。
 
 不需要安裝套件，也不需要登入。圖片、參數與輸出內容都在使用者的瀏覽器中處理。
@@ -23,9 +25,7 @@
 - 不上傳輸出的 JSON 或 ZIP
 - 不需要姓名、Email 或 GitHub 帳號
 
-<br>
-
-☕ 可選支持：[協助 Particle Editor 後續維護（Ko-fi）](https://ko-fi.com/kirinylab)
+<sub>[支持後續維護（Ko-fi）](https://ko-fi.com/kirinylab)</sub>
 
 ## 這個工具能做什麼？
 
@@ -218,7 +218,3 @@ Particle Editor 目前以**免費公開測試版**提供線上使用，原始碼
 - 可公開的 `_notforspine.json` 範例
 
 請先移除任何公司名稱、專案名稱或不可公開的圖片與資料。
-
-## 支持後續維護
-
-Particle Editor 會持續依照測試回饋改善。若你覺得工具實用，也可以透過 [Ko-fi](https://ko-fi.com/kirinylab) 支持後續維護；完全自願，不影響工具功能、輸出內容或使用權限。
