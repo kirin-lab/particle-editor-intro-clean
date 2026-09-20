@@ -8,6 +8,8 @@
 
 此 GitHub Repository 是 Particle Editor 的**工具介紹與問題回報頁面**，不包含編輯器程式碼。
 
+![Particle Editor 示意畫面](images/spine錄影17m_gif.gif)
+
 ![Particle Editor 操作畫面](images/editor-overview.png)
 
 ## 立即使用
@@ -16,7 +18,9 @@
 
 ### 線上網址：[https://particle-editor.kirinlab.workers.dev](https://particle-editor.kirinlab.workers.dev/)
 
-### [▶ YouTube 操作教學](https://youtu.be/a_gSDpEJlk4)
+### [▶ YouTube 快速操作教學](https://youtu.be/a_gSDpEJlk4)
+
+### [▶ YouTube 較詳細，包含輸入輸出說明，操作教學，可切換頻道字幕](https://youtu.be/3RqR93i5vqA)
 
 目前版本：
 
