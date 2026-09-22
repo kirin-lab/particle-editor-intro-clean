@@ -35,14 +35,14 @@ The current version:
 
 ## What Does It Do?
 
-Particle Editor converts particle effects into skeletal animations that can be imported into Spine. Each particle becomes a bone, with position, size, rotation, color, opacity, and attachment visibility baked into animation timelines.
+Particle Editor lets you create particle effects and export animations for Spine. Adjust movement, size, rotation, color, and opacity, then preview the result before exporting.
 
 Key features:
 
 - Chinese/English interface switching, with the preference stored only in the local browser
-- Live Canvas particle preview
+- Live particle preview
 - Baked preview with fixed random results
-- Loop preview based on the exported timeline
+- Loop animation preview
 - Point, directional, circle, ring, box, and box-ring emitters
 - Independent X/Y coordinates for each emitter, consistent across preview and Spine export
 - Duplicate the selected emitter's settings, curves, and image for color or variation effects
@@ -50,9 +50,9 @@ Key features:
 - Circle, ring, box, and box-ring dimensions up to 10,000 px
 - Outward, inward, and split emission directions
 - Evenly distributed initial spawn positions
-- Reproducible random seeds: the same seed keeps the same distribution, while a different seed changes it, including the phase of even distributions
+- Random seeds: with other settings unchanged, the same seed reproduces the effect; change the seed to try a different distribution
 - Emission duration, particle lifetime, and random variation
-- Up to 300 particles per emitter; higher counts increase Spine bones, JSON size, and preview load
+- Up to 300 particles per emitter; higher counts increase export size and preview load
 - A separate Motion section with Distance and Initial Speed (physics) modes
 - Emission, speed, size, and opacity curves
 - Fixed random size per particle using Base Size +/- Random Size
@@ -61,7 +61,7 @@ Key features:
 - Vertical gravity, 360-degree wind direction, wind strength, rotation speed, and direction alignment
 - Optional background preview, positioning, and export
 - 50%, 60%, and 70% loop cuts
-- Repeat and proportionally retime `_repeat` to an exact target frame count
+- Set a target frame count for the loop animation
 - One-click ZIP export
 
 ## How to Use
@@ -74,14 +74,14 @@ Open the online editor in a supported browser. No installation or sign-in is req
 
 This repository contains only the introduction, documentation, screenshots, and issue-reporting page. It does not include an offline copy of the editor.
 
-The offline test version is currently provided individually by the author. Do not download this repository expecting to find `index.html` or `particle-editor.html`. A download link will be published here if an official offline version becomes available.
+The offline test version is currently provided individually by the author. A download link will be published here if an official offline version becomes available.
 
 ## Recommended Workflow
 
 1. Add, duplicate, or select an emitter. Set independent X/Y coordinates under ID / Naming when needed.
 2. Adjust its shape, emission, motion, physics, rotation, and visual settings.
 3. Use Live Preview to check the overall effect.
-4. Select Bake to lock particle timing, lifetime, direction, and random values.
+4. Select Bake to create a fixed version for preview and export.
 5. Use Baked Preview to review the fixed export result.
 6. For a looping animation, choose a 50%, 60%, or 70% loop cut and create the loop.
 7. Use Loop Preview to check the `_repeat` animation.
@@ -97,9 +97,9 @@ The emitter list and parameter controls are on the left, with the preview on the
 Each emitter has independent X/Y coordinates under **ID / Naming** and two choices under **Motion**:
 
 - **Distance (legacy mode)**: sets the total distance traveled during the particle lifetime. Increasing lifetime lowers average speed. Older settings continue to use this mode.
-- **Initial Speed (physics)**: sets launch speed directly in `px/s`. Lifetime changes only when the particle disappears; velocity, direction, gravity, and wind determine the path.
+- **Initial Speed (physics)**: sets launch speed directly in `px/s`. Increasing lifetime does not lower the selected initial speed. Use gravity and wind to adjust the effect.
 
-Older settings without coordinates use `(0,0)`. If initial-speed data is absent, the editor derives a starting value from the existing distance and lifetime.
+After loading older settings, check emitter positions and movement before baking again.
 
 ## Loop Cuts
 
@@ -115,30 +115,21 @@ Available cut ratios:
 
 - **50%**: a shorter loop that may require closer overlap and trajectory inspection
 - **60%**: shorter and denser loop timing
-- **70%**: the default, compatible with the current loop reference
+- **70%**: the default; a recommended starting point for previewing
 
-Frame calculation:
-
-```text
-total frames = floor(original duration in seconds x 30)
-cut frame = floor(total frames x 0.5, 0.6, or 0.7)
-```
-
-The editor moves animation data after the cut back to frame 0, removes keys after the cut from their original positions, and keeps the cut as the final frame of the `_repeat` animation. Attachment visibility is processed as well.
+Compare cut ratios in Loop Preview to check transitions and overall timing.
 
 After changing the cut ratio, create the loop again so the preview and export use the same ratio.
 
 ### Target Loop Duration
 
-After creating `_repeat`, enter an exact target frame count. The editor chooses the closest whole number of repetitions, then proportionally retimes all bone, slot, color, attachment, scale, and rotation timelines. For example, a 39-frame loop targeting 100 frames uses three complete repetitions and retimes them to 100 frames, producing `particle01_repeat_x3_100`.
+After creating `_repeat`, enter the desired frame count under Target Loop, then create and preview the target animation. Changing the total duration may change the playback rhythm, so review the result before exporting.
 
-The editor analyzes visible lifetimes, abnormal speed, and loop seams. Suspected visible snap-back blocks creation, while substantial speed jumps produce a warning. A target shorter than one loop or requiring more than 120 repetitions is also rejected. These checks reduce risk but do not replace final seam inspection in Spine.
+If a warning appears or creation is blocked, follow the on-screen guidance to adjust the target frame count or particle settings, then create the loop again. Check the loop seam in Spine after export.
 
 ## Export Contents
 
-Supported browsers download a standard ZIP file. For a project named `particles`:
-
-To avoid browser-generated names such as `particles (1).zip`, ZIP names include a bake number and local export time, for example `particles_b3316_260826-143052.zip`. Spaces, parentheses, and unsafe path characters become underscores; another export within the same second receives `_02`.
+Export Bake downloads a ZIP file. Its name includes identifying information to help distinguish multiple exports. The following example shows the contents for a project named `particles`:
 
 ```text
 particles.zip
@@ -154,7 +145,7 @@ particles.zip
 - `particles_notforspine.json`: Particle Editor settings for reloading the project; do not import this file into Spine
 - `images/`: one particle image per emitter, plus the optional exported background
 
-The loop-cut ratio and target frame count are saved in `_notforspine.json`. Older settings without these fields use 70% and 100 frames.
+After reloading settings, check the loop-cut ratio and target frame count before creating the loop again.
 
 ## Importing into Spine
 
@@ -168,54 +159,37 @@ Particle Editor does not generate an `.atlas` file. Create one separately in Spi
 
 ## Custom Images and Backgrounds
 
-Visual's Original Image Facing option can be Right, Up, Left, or Down. Angle Fine-tune compensates for artwork that is slightly tilted. Both work together with Rotation's Align to Direction option in live preview, baked preview, and export. Older settings default to Right and preserve the previous correction angle as Angle Fine-tune.
+Visual's Original Image Facing option can be Right, Up, Left, or Down. Angle Fine-tune compensates for artwork that is slightly tilted. To make the image follow its movement, enable Rotation's Align to Direction option and check the orientation in the preview.
 
 - Each emitter uses a unique image name, such as `1_par_01.png` and `2_par_01.png`.
-- Replacing an image after baking updates baked preview, loop preview, and export without resampling particle timing or paths.
+- Replacing an image after baking updates baked preview, loop preview, and export without changing the existing particle movement.
 - Custom particle images preserve their original aspect ratio and pixel dimensions. Images larger than 2048 px on their longest side are resized proportionally.
-- Base Size controls the displayed size in Canvas and Spine, using the image's longest side as the reference.
-- Spine attachments use the exported PNG's actual pixel dimensions; display size is represented by bone scale to prevent oversized particles after import.
-- Random Size is sampled once when each particle is created. For example, Base Size 5 and Random Size +/-2 produce sizes from 3 to 7 px before applying the size curve.
-- Built-in images are exported at sufficient resolution for the base size, maximum random size, and maximum size-curve multiplier.
+- Base Size controls the displayed particle size using the image's longest side as the reference, while preserving its aspect ratio.
+- Random Size adds variation to particle sizes. For example, Base Size 5 and Random Size +/-2 give a starting size range of 3 to 7 px. Use the size curve to adjust how size changes over time.
 - Custom images under **2 MB** and no larger than **2048 px** are recommended.
 - A background is used only for preview unless Export Background is enabled.
-- Background images keep their original aspect ratio and use a dedicated `background` bone below particle slots.
-- Fit Background changes only the preview camera. It does not resize the image, move Root, or affect Spine output.
-- Reloading `_notforspine.json` restores background coordinates, but the image must be selected again because of browser privacy restrictions.
+- Background images keep their original aspect ratio. Exported backgrounds retain the selected position and appear behind the particles.
+- Fit Background adjusts only the preview view and does not affect the export.
+- Reloading `_notforspine.json` restores background coordinates, but the image must be selected again.
 
 ## Preview Modes
 
 - **Live Preview**: quickly reflects current settings; random details may change
 - **Baked Preview**: plays the most recently fixed bake
-- **Loop Preview**: samples the timeline that will be exported as `_repeat`
+- **Loop Preview**: reviews the `_repeat` loop you created
 
 Replay restarts the current result without resampling it. Use Resample Bake to generate a different fixed result.
 
-## Privacy and Network Verification
-
-The current version has undergone static inspection and automated browser testing with synthetic PNG files and particle settings. The tested workflow covers file loading, parameter changes, previewing, baking, looping, and ZIP export.
-
-Results as of **September 16, 2026**:
-
-- No cross-origin requests were detected.
-- No POST, PUT, PATCH, DELETE, Fetch/XHR, WebSocket, EventSource, or Beacon activity was detected.
-- No third-party analytics, tracking, or telemetry services were detected.
-- Only same-origin HTTPS GET requests for the page and default particle image were observed.
-- User-loaded images, particle settings, and exported content were not transmitted externally.
-
-These results apply only to the tested version and workflows. Verification is repeated when future versions are updated.
-
 ## Privacy Notes
 
-Particle Editor is currently a client-side web tool:
+- Images, settings, and exported files are processed in your browser; project content is not uploaded.
+- Settings files are read only when you choose to load them.
+- The editor does not collect usage analytics or track users.
+- The Chinese/English interface preference is saved only in your local browser.
 
-- Project images are processed in browser memory
-- Settings files are read only when the user selects them
-- JSON and ZIP files are generated locally in the browser
-- No analytics API, user tracking, or device fingerprinting is included
-- The only `localStorage` item is the Chinese/English interface preference; it stays on the device and contains no personal data
+Checks of the version tested on **September 16, 2026** found no external transmission of project content during the tested loading, editing, preview, and export workflows. This result applies only to that version and those tested workflows.
 
-The online version must still be served by website infrastructure, which may generate ordinary connection logs. Particle Editor itself does not actively collect or transmit project content.
+The online version requires a connection to load the website. Website infrastructure may generate ordinary connection logs; Particle Editor itself does not actively collect or transmit project content.
 
 ## Usage and Licensing
 
@@ -238,11 +212,11 @@ Users may freely create and export their own particle animations through the off
 - Recommended browsers: latest Chrome or Edge
 - Up to 10 emitters
 - Up to 300 particles per emitter
-- Each particle adds one Spine bone; choose particle counts according to project performance requirements
-- Canvas and Spine are different rendering environments, so blending, curve sampling, and pixel output may differ slightly
+- Higher particle counts increase the performance load of the preview and exported animation; choose counts that suit your project
+- The browser preview and Spine may look slightly different; check the final result after import
 - Baked and loop data exist only in the current browser session; loading settings requires baking again
 - There is no automatic save; export the ZIP before closing the page
-- Interface language affects labels only; it does not change JSON, ZIP, bone, or slot names
+- Interface language affects labels only; it does not change exported file or animation names
 
 ## Reporting Issues
 
