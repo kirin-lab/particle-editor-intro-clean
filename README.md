@@ -8,11 +8,10 @@
 
 此 GitHub Repository 是 Particle Editor 的**工具介紹與問題回報頁面**，不包含編輯器程式碼。
 
-![Particle Editor 示意畫面](
 
 https://github.com/user-attachments/assets/b0a346c2-a8b9-4647-b05d-f04c76b180d7
 
-)
+
 
 ![Particle Editor 操作畫面](images/editor-overview.png)
 
