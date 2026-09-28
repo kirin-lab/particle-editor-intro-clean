@@ -22,8 +22,6 @@ https://github.com/user-attachments/assets/b0a346c2-a8b9-4647-b05d-f04c76b180d7
 
 ### [▶ 開啟 Particle Editor 線上版](https://particle-editor.kirinlab.workers.dev)
 
-### 線上網址：[https://particle-editor.kirinlab.workers.dev](https://particle-editor.kirinlab.workers.dev/)
-
 ### [▶ YouTube 快速操作教學](https://youtu.be/a_gSDpEJlk4)
 
 ### [▶ YouTube 較詳細，包含輸入輸出說明，操作教學，可切換頻道字幕](https://youtu.be/3RqR93i5vqA)
