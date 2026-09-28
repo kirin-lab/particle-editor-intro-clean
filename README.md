@@ -9,7 +9,6 @@
 此 GitHub Repository 是 Particle Editor 的**工具介紹與問題回報頁面**，不包含編輯器程式碼。
 
 ▼ 大多數氣泡粒子由 Particle Editor 產生，匯入 Spine 3.8 後的畫面效果（人魚插畫動畫為 Midjourney 生成）。
-操作過程請看 [YouTube 教學影片](https://youtu.be/3RqR93i5vqA)。
 
 
 
