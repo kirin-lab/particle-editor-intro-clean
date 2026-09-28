@@ -8,8 +8,10 @@ No installation or account is required. Images, settings, and exported files are
 
 This repository is the **introduction, documentation, and issue-reporting page** for Particle Editor. It does not contain the editor source code.
 
+▼ Most of the bubble particles were created with Particle Editor and imported into Spine 3.8 (the mermaid illustration animation was generated with Midjourney). See the [YouTube tutorial](https://youtu.be/3RqR93i5vqA) for the full workflow.
 
 https://github.com/user-attachments/assets/b0a346c2-a8b9-4647-b05d-f04c76b180d7
+
 
 
 ![Particle Editor overview](images/editor-overview.png)
