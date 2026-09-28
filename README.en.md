@@ -20,7 +20,6 @@ https://github.com/user-attachments/assets/b0a346c2-a8b9-4647-b05d-f04c76b180d7
 
 ### [Open Particle Editor](https://particle-editor.kirinlab.workers.dev/)
 
-### Online URL: [https://particle-editor.kirinlab.workers.dev](https://particle-editor.kirinlab.workers.dev/)
 
 ### [Watch the YouTube Tutorial](https://youtu.be/a_gSDpEJlk4)
 
