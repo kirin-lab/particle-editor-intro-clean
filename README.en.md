@@ -4,6 +4,8 @@
 
 Create, preview, bake, and export particle-based skeletal animations for **Spine 3.8.99** directly in your browser.
 
+Spine has no built-in particle system, so effects such as bubbles, sparks, and glowing dots often require setting up many bones by hand. Particle Editor lets you adjust parameters in the browser and automatically bakes the result into a particle animation you can import directly into Spine.
+
 No installation or account is required. Images, settings, and exported files are processed locally in the user's browser.
 
 This repository is the **introduction, documentation, and issue-reporting page** for Particle Editor. It does not contain the editor source code.
@@ -19,7 +21,6 @@ https://github.com/user-attachments/assets/b0a346c2-a8b9-4647-b05d-f04c76b180d7
 ## Try It Online
 
 ### [Open Particle Editor](https://particle-editor.kirinlab.workers.dev/)
-
 
 ### [Watch the YouTube Tutorial](https://youtu.be/a_gSDpEJlk4)
 
@@ -40,7 +41,13 @@ The current version:
 
 Particle Editor lets you create particle effects and export animations for Spine. Adjust movement, size, rotation, color, and opacity, then preview the result before exporting.
 
-Key features:
+**Highlights:**
+
+- **Reproducible baking**: random seeds lock the particle distribution, so the same settings always produce the same result
+- **Seamless loops**: 50%, 60%, and 70% loop cuts, plus a target total frame count
+- **Direct Spine import**: exports standard JSON and images, with no extra plugins required
+
+All features:
 
 - Chinese/English interface switching, with the preference stored only in the local browser
 - Live particle preview
@@ -190,9 +197,15 @@ Replay restarts the current result without resampling it. Use Resample Bake to g
 - The editor does not collect usage analytics or track users.
 - The Chinese/English interface preference is saved only in your local browser.
 
-Checks of the version tested on **September 16, 2026** found no external transmission of project content during the tested loading, editing, preview, and export workflows. This result applies only to that version and those tested workflows.
+Checks of the online version tested on **September 27, 2026** found no external transmission of project content during the tested loading, editing, preview, and export workflows. This result applies only to that version and those tested workflows.
 
 The online version requires a connection to load the website. Website infrastructure may generate ordinary connection logs; Particle Editor itself does not actively collect or transmit project content.
+
+## About Development
+
+Particle Editor was planned and designed by Kiriny based on real Spine animation production needs, and developed in collaboration with AI coding assistants. Feature direction, interface design, and output quality were decided and tested by the author based on animation production experience.
+
+The tool itself does not use AI features; all processing happens in your browser.
 
 ## Usage and Licensing
 
